@@ -9,26 +9,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <main class="min-h-[100vh] py-20 flex flex-col justify-center items-center bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500">
-        <h1 class="font-bold text-7xl text-slate-900">Books</h1>
+    <main class="min-h-[100vh] py-20 flex flex-col justify-center items-center bg-gradient-to-r from-indigo-400 via-sky-400 to-purple-400">
+        <h1 class=" pb-28 font-bold text-7xl text-blue-700">Welcome to Library</h1>
+        <h3 class=" pb-10 font-bold text-6xl text-purple-900">Books</h3>
         <div class="mt-10 text-red-500 text-8xl text-center grid grid-cols-4 gap-10">
             {% for book in books %}
-                <div class="rounded-lg hover:bg-black/70 transition cursor-pointer backdrop-blur-lg bg-black/30 gap-6 text-white font-bold p-20 flex flex-col">
-                    <strong class="block text-2xl">{{ book.title }}</strong>
-                    <span class="block w-full text-center text-yellow-500 text-4xl">{{ book.author }}</span>
-                    <span class="block w-full text-center text-yellow-500 text-4xl">{{ book.published_date }}</span>
-                    <span class="block w-full text-center text-yellow-500 text-4xl">{{ book.isbn }}</span>
-                    <a style = "font-size: 2rem" class="mt-4 text-blue-400 underline" href="{% url 'book_detail' book.pk %}">View Details</a>
-                {% if book_id %}    
-                    <a class="inline-block rounded-full bg-indigo-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-indigo-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-indigo-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] active:bg-indigo-700 active:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
-                    style="font-size: 2rem" href="{% url 'book_create_update' book.pk %}"> Update Book </a>
-                {%  endif %}
+                <div class="rounded-lg hover:bg-black/50 transition cursor-pointer backdrop-blur-lg bg-black/30 gap-6 text-white font-bold p-20 flex flex-col">
+                    <strong class="block text-4xl">Title: {{ book.title }}</strong>
+{#                    <span class="block w-full text-center text-yellow-500 text-2xl">{{ book.author }}</span>#}
+{#                    <span class="block w-full text-center text-yellow-500 text-2xl">{{ book.published_date }}</span>#}
+{#                    <span class="block w-full text-center text-yellow-500 text-2xl">{{ book.isbn }}</span>#}
+                    <a style = "font-size: 1.5rem" class="mt-4 text-yellow-200 underline" href="{% url 'book_detail' book.pk %}">View Details</a>
+  
+                    <a style = "font-size: 1.5rem" class="mt-4 text-yellow-200 underline" href="{% url 'book_edit' book.pk %}">Update</a>
+
                 </div>
             {% endfor %}
         </div>
 
-        <div class="mt-10 space-x-4">
-            <a class="inline-block rounded-full bg-indigo-500 text-neutral-50 shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-indigo-600 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-indigo-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
+        <div class="pt-20 mt-10 space-x-4">
+            <a class="inline-block rounded-full bg-yellow-400 text-black shadow-[0_4px_9px_-4px_rgba(51,45,45,0.7)] hover:bg-purple-500 hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] focus:bg-indigo-800 focus:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.2),0_4px_18px_0_rgba(51,45,45,0.1)] px-12 py-6 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out focus:outline-none focus:ring-0"
                href="{% url 'book_create_update' %}" style="font-size: 2rem">Create Book</a>
         </div>
     </main>

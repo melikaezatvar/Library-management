@@ -15,7 +15,20 @@ def book_detail(request, book_id):
 
 def book_create_update(request, book_id=None):
     if book_id:
-        book = get_object_or_404(Book, id=book_id)
+        obj = get_object_or_404(Book, id=book_id)
+
+        form = BookForm(request.POST or None, instance=obj)
+        context = dict()
+        # save the data from the form and
+        # redirect to detail_view
+        if form.is_valid():
+            form.save()
+            return redirect('book_list')
+
+        # add form dictionary to context
+        context["form"] = form
+
+        return render(request, "book_form.html", context)
     else:
         book = None
 

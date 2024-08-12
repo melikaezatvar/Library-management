@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Book</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Book</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-    <a href="{% url 'book_list' %}">Cancel</a>
+    <main class="min-h-[100vh] py-20 pb-20 flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-sky-300 to-purple-200">
+        <div class="rounded-lg hover:bg-black/50 transition backdrop-blur-lg bg-black/30 gap-10 text-white font-bold p-20 flex flex-col">
+            <h1 class="font-bold text-5xl text-white text-center">
+                {% if form.instance.pk %}Edit{% else %}Create{% endif %} Book
+            </h1>
+            <form action="" method="post" class="gap-10 flex flex-col" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="relative mb-6">
+                        <input type="text" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|stringformat:"s" }}" class="text-xl block w-full appearance-none bg-transparent border-0 border-b-2 border-white text-white focus:outline-none focus:ring-0 focus:border-yellow-500 peer" placeholder=" " />
+                        <label for="{{ field.id_for_label }}" class="absolute text-white text-xl duration-300 transform -translate-y-8 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-2 peer-focus:scale-75 peer-focus:-translate-y-8">{{ field.label }}</label>
+                        {% if field.errors %}
+                            <span class="text-red-500 text-sm">{{ field.errors.as_text }}</span>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <!-- Submit button -->
+                <input type="submit" value="{% if form.instance.pk %}Update{% else %}Create Book{% endif %}" class="text-black bg-yellow-500 rounded-lg p-2 mt-4 self-center hover:bg-purple-500 transition-all">
+            </form>
+        </div>
+    </main>
 </body>
 </html>
